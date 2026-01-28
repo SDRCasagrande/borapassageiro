@@ -1,0 +1,721 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bora Passageiro - Premium Redesign</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Phone Frame -->
+    <div class="phone-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span class="time">11:30</span>
+            <div class="status-icons">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-three-quarters"></i>
+            </div>
+        </div>
+
+        <!-- Sidebar Overlay -->
+        <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+        <!-- Premium Sidebar Drawer -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Close Button -->
+            <button class="sidebar-close" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- User Profile -->
+            <div class="sidebar-header">
+                <div class="sidebar-avatar-wrap">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+                        alt="Profile" class="sidebar-avatar">
+                    <div class="avatar-badge"><i class="fas fa-check"></i></div>
+                </div>
+                <div class="sidebar-user">
+                    <h3>Mateus Casagrande</h3>
+                    <div class="sidebar-stats">
+                        <span class="stat-item"><i class="fas fa-wallet"></i> R$ 0,00</span>
+                        <span class="stat-item"><i class="fas fa-star"></i> 5,00</span>
+                    </div>
+                </div>
+            </div>
+            <button class="sidebar-invite" onclick="showScreen('indicar')">
+                <i class="fas fa-gift"></i> Indique um amigo
+            </button>
+
+            <!-- Viagem Section -->
+            <div class="sidebar-section">
+                <span class="section-label">Viagem</span>
+                <button class="sidebar-link active" onclick="showScreen('nova-viagem')">
+                    <div class="link-icon"><i class="fas fa-location-dot"></i></div>
+                    <span>Nova Viagem</span>
+                </button>
+                <button class="sidebar-link" onclick="showScreen('home')">
+                    <div class="link-icon"><i class="fas fa-users"></i></div>
+                    <span>Para outra Pessoa</span>
+                </button>
+                <button class="sidebar-link" onclick="showScreen('home')">
+                    <div class="link-icon"><i class="fas fa-clock"></i></div>
+                    <span>Agendamento</span>
+                </button>
+                <button class="sidebar-link" onclick="showScreen('historico')">
+                    <div class="link-icon"><i class="fas fa-history"></i></div>
+                    <span>Historico</span>
+                </button>
+                <button class="sidebar-link" onclick="showScreen('itens-perdidos')">
+                    <div class="link-icon"><i class="fas fa-undo"></i></div>
+                    <span>Itens Perdidos</span>
+                </button>
+            </div>
+
+            <!-- Entrega Section -->
+            <div class="sidebar-section">
+                <span class="section-label">Entrega</span>
+                <button class="sidebar-link" onclick="showScreen('nova-entrega')">
+                    <div class="link-icon"><i class="fas fa-box"></i></div>
+                    <span>Nova Entrega</span>
+                </button>
+                <button class="sidebar-link" onclick="showScreen('entregas')">
+                    <div class="link-icon"><i class="fas fa-calendar-check"></i></div>
+                    <span>Meus Pedidos</span>
+                </button>
+            </div>
+
+            <!-- Outros Section -->
+            <div class="sidebar-section">
+                <span class="section-label">Outros</span>
+                <button class="sidebar-link" onclick="showScreen('servicos')">
+                    <div class="link-icon"><i class="fas fa-concierge-bell"></i></div>
+                    <span>Produtos e Servicos</span>
+                </button>
+                <button class="sidebar-link" onclick="showScreen('parceiros')">
+                    <div class="link-icon"><i class="fas fa-handshake"></i></div>
+                    <span>Parcerias Bora</span>
+                </button>
+            </div>
+
+            <!-- Configuracoes Section -->
+            <div class="sidebar-section">
+                <span class="section-label">Configuracoes</span>
+                <button class="sidebar-link" onclick="showScreen('carteira')">
+                    <div class="link-icon"><i class="fas fa-credit-card"></i></div>
+                    <span>Carteira</span>
+                </button>
+                <button class="sidebar-link" onclick="showScreen('perfil')">
+                    <div class="link-icon"><i class="fas fa-user"></i></div>
+                    <span>Meus Dados</span>
+                </button>
+                <button class="sidebar-link" onclick="showScreen('home')">
+                    <div class="link-icon"><i class="fas fa-lock"></i></div>
+                    <span>Redefinir Senha</span>
+                </button>
+                <button class="sidebar-link" onclick="showScreen('configuracoes')">
+                    <div class="link-icon"><i class="fas fa-gear"></i></div>
+                    <span>Configuracoes</span>
+                </button>
+            </div>
+
+            <!-- Logout -->
+            <button class="sidebar-link logout" onclick="showScreen('splash')">
+                <div class="link-icon logout-icon"><i class="fas fa-right-from-bracket"></i></div>
+                <span>Sair</span>
+            </button>
+        </aside>
+
+        <!-- App Container -->
+        <div class="app-container">
+
+            <!-- ============ SPLASH SCREEN ============ -->
+            <section id="splash" class="screen active">
+                <div class="splash-bg"></div>
+                <div class="splash-content">
+                    <div class="splash-logo">
+                        <div class="logo-icon"><i class="fas fa-route"></i></div>
+                        <h1>BORA</h1>
+                        <span class="tagline">PASSAGEIRO</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=500&fit=crop"
+                        alt="Welcome" class="splash-image">
+                    <button class="btn-primary" onclick="showScreen('home')">
+                        Comecar <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ============ HOME SCREEN ============ -->
+            <section id="home" class="screen">
+                <!-- Header -->
+                <header class="app-header">
+                    <button class="menu-btn" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="location-display">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Xinguara, PA</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <button class="notif-btn" onclick="showScreen('alertas')">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">2</span>
+                    </button>
+                </header>
+
+                <!-- Search -->
+                <div class="search-wrapper">
+                    <div class="search-box" onclick="showScreen('nova-viagem')">
+                        <i class="fas fa-search"></i>
+                        <span>Para onde voce quer ir?</span>
+                    </div>
+                </div>
+
+                <!-- Map Area -->
+                <div class="map-container">
+                    <div class="map-tiles"></div>
+                    <div class="user-marker">
+                        <div class="pulse"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions (Bottom Fixed) -->
+                <div class="quick-actions">
+                    <button class="qa-btn" onclick="showScreen('nova-viagem')">
+                        <div class="qa-icon corrida"><i class="fas fa-car"></i></div>
+                        <span>Corrida</span>
+                    </button>
+                    <button class="qa-btn" onclick="showScreen('entregas')">
+                        <div class="qa-icon entregas"><i class="fas fa-box"></i></div>
+                        <span>Entregas</span>
+                    </button>
+                    <button class="qa-btn" onclick="showScreen('servicos')">
+                        <div class="qa-icon moto"><i class="fas fa-motorcycle"></i></div>
+                        <span>Moto</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ============ NOVA VIAGEM ============ -->
+            <section id="nova-viagem" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('home')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Nova Viagem</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content">
+                    <div class="input-group">
+                        <label>Origem</label>
+                        <div class="input-field">
+                            <i class="fas fa-circle text-primary"></i>
+                            <input type="text" placeholder="Sua localizacao" value="Xinguara, PA">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Destino</label>
+                        <div class="input-field">
+                            <i class="fas fa-location-dot text-danger"></i>
+                            <input type="text" placeholder="Para onde?">
+                        </div>
+                    </div>
+                    <button class="btn-primary mt-auto" onclick="showScreen('confirmar-viagem')">
+                        Buscar Motoristas
+                    </button>
+                </div>
+            </section>
+
+            <!-- ============ CONFIRMAR VIAGEM ============ -->
+            <section id="confirmar-viagem" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('nova-viagem')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Confirmar Viagem</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content">
+                    <div class="trip-card">
+                        <div class="trip-route">
+                            <div class="route-point"><i class="fas fa-circle text-primary"></i> Xinguara, PA</div>
+                            <div class="route-line"></div>
+                            <div class="route-point"><i class="fas fa-location-dot text-danger"></i> Centro, Xinguara
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="section-title">Veiculo</h3>
+                    <div class="vehicle-options">
+                        <div class="vehicle-card selected">
+                            <i class="fas fa-car"></i>
+                            <span class="vehicle-name">Economico</span>
+                            <span class="vehicle-price">R$ 8,50</span>
+                        </div>
+                        <div class="vehicle-card">
+                            <i class="fas fa-car-side"></i>
+                            <span class="vehicle-name">Conforto</span>
+                            <span class="vehicle-price">R$ 12,00</span>
+                        </div>
+                    </div>
+                    <button class="btn-primary mt-auto" onclick="showScreen('em-viagem')">
+                        Confirmar - R$ 8,50
+                    </button>
+                </div>
+            </section>
+
+            <!-- ============ EM VIAGEM ============ -->
+            <section id="em-viagem" class="screen">
+                <div class="trip-map">
+                    <div class="map-tiles full"></div>
+                </div>
+                <div class="trip-info-card">
+                    <div class="driver-info">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face"
+                            alt="Driver">
+                        <div class="driver-details">
+                            <h4>Joao Silva</h4>
+                            <div class="driver-rating"><i class="fas fa-star"></i> 4.9</div>
+                            <span class="car-info">Honda Civic Preto - ABC-1234</span>
+                        </div>
+                    </div>
+                    <div class="trip-eta">
+                        <i class="fas fa-clock"></i>
+                        <span>Chegada em <strong>5 min</strong></span>
+                    </div>
+                    <div class="trip-actions">
+                        <button class="action-btn"><i class="fas fa-phone"></i> Ligar</button>
+                        <button class="action-btn"><i class="fas fa-message"></i> Mensagem</button>
+                        <button class="action-btn danger" onclick="showScreen('home')">
+                            <i class="fas fa-xmark"></i> Cancelar
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ ENTREGAS ============ -->
+            <section id="entregas" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('home')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Entregas</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content">
+                    <div class="tabs">
+                        <button class="tab active">Pendentes</button>
+                        <button class="tab">Concluidas</button>
+                    </div>
+                    <div class="delivery-list">
+                        <div class="delivery-card">
+                            <div class="delivery-icon"><i class="fas fa-box"></i></div>
+                            <div class="delivery-info">
+                                <h4>Rua Principal, 450</h4>
+                                <span>25 Jan 2026 - R$ 15,00</span>
+                            </div>
+                            <span class="status pending">Pendente</span>
+                        </div>
+                        <div class="delivery-card">
+                            <div class="delivery-icon complete"><i class="fas fa-check"></i></div>
+                            <div class="delivery-info">
+                                <h4>Av. Brasil, 1200</h4>
+                                <span>24 Jan 2026 - R$ 22,00</span>
+                            </div>
+                            <span class="status complete">Entregue</span>
+                        </div>
+                    </div>
+                    <button class="btn-primary floating-btn" onclick="showScreen('nova-entrega')">
+                        <i class="fas fa-plus"></i> Nova Entrega
+                    </button>
+                </div>
+            </section>
+
+            <!-- ============ NOVA ENTREGA ============ -->
+            <section id="nova-entrega" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('entregas')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Nova Entrega</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content">
+                    <div class="input-group">
+                        <label>Coleta</label>
+                        <div class="input-field">
+                            <i class="fas fa-circle text-primary"></i>
+                            <input type="text" placeholder="Endereco de coleta">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Entrega</label>
+                        <div class="input-field">
+                            <i class="fas fa-location-dot text-danger"></i>
+                            <input type="text" placeholder="Endereco de entrega">
+                        </div>
+                    </div>
+                    <h3 class="section-title">Tipo de Pacote</h3>
+                    <div class="package-options">
+                        <div class="package-card selected">
+                            <i class="fas fa-envelope"></i>
+                            <span>Documento</span>
+                        </div>
+                        <div class="package-card">
+                            <i class="fas fa-box"></i>
+                            <span>Pequeno</span>
+                        </div>
+                        <div class="package-card">
+                            <i class="fas fa-boxes-stacked"></i>
+                            <span>Medio</span>
+                        </div>
+                    </div>
+                    <button class="btn-primary mt-auto">
+                        Solicitar Entrega
+                    </button>
+                </div>
+            </section>
+
+            <!-- ============ CARTEIRA ============ -->
+            <section id="carteira" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('home')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Carteira</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content">
+                    <div class="balance-card">
+                        <span class="balance-label">Saldo disponivel</span>
+                        <h2 class="balance-value">R$ 47,50</h2>
+                        <button class="add-money-btn"><i class="fas fa-plus"></i> Adicionar</button>
+                    </div>
+                    <h3 class="section-title">Formas de pagamento</h3>
+                    <div class="payment-methods">
+                        <div class="payment-item selected">
+                            <i class="fas fa-bolt"></i>
+                            <span>Pix</span>
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="payment-item">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Cartao de credito</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="payment-item">
+                            <i class="fas fa-money-bill"></i>
+                            <span>Dinheiro</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    <h3 class="section-title">Historico</h3>
+                    <div class="transaction-list">
+                        <div class="transaction">
+                            <div class="tx-icon expense"><i class="fas fa-arrow-up"></i></div>
+                            <div class="tx-info">
+                                <h4>Viagem - Terminal</h4>
+                                <span>27 Jan 2026</span>
+                            </div>
+                            <span class="tx-amount expense">-R$ 12,50</span>
+                        </div>
+                        <div class="transaction">
+                            <div class="tx-icon income"><i class="fas fa-arrow-down"></i></div>
+                            <div class="tx-info">
+                                <h4>Recarga via Pix</h4>
+                                <span>26 Jan 2026</span>
+                            </div>
+                            <span class="tx-amount income">+R$ 50,00</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ PERFIL ============ -->
+            <section id="perfil" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('home')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Meu Perfil</h2>
+                    <button class="edit-btn"><i class="fas fa-pen"></i></button>
+                </header>
+                <div class="screen-content">
+                    <div class="profile-header">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face"
+                            alt="Profile" class="profile-avatar">
+                        <h3>Mateus Casagrande</h3>
+                        <div class="profile-stats">
+                            <div class="stat"><span class="stat-value">R$ 47,50</span><span
+                                    class="stat-label">Saldo</span></div>
+                            <div class="stat"><span class="stat-value">5,00</span><span
+                                    class="stat-label">Avaliacao</span></div>
+                        </div>
+                    </div>
+                    <div class="menu-list">
+                        <button class="menu-item" onclick="showScreen('historico')">
+                            <i class="fas fa-history"></i>
+                            <span>Historico de viagens</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="menu-item highlight" onclick="showScreen('indicar')">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Indicar amigo</span>
+                            <span class="badge-reward">R$ 5,00</span>
+                        </button>
+                        <button class="menu-item" onclick="showScreen('itens-perdidos')">
+                            <i class="fas fa-search"></i>
+                            <span>Itens perdidos</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="menu-item" onclick="showScreen('configuracoes')">
+                            <i class="fas fa-gear"></i>
+                            <span>Configuracoes</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <button class="menu-item danger" onclick="showScreen('splash')">
+                            <i class="fas fa-right-from-bracket"></i>
+                            <span>Sair</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ HISTORICO ============ -->
+            <section id="historico" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('perfil')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Historico</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content">
+                    <div class="history-list">
+                        <div class="history-item">
+                            <div class="history-date">27 Jan 2026</div>
+                            <div class="history-route">
+                                <i class="fas fa-location-dot"></i>
+                                <div>
+                                    <span class="from">Centro - Terminal</span>
+                                    <span class="price">R$ 12,50</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="history-item">
+                            <div class="history-date">25 Jan 2026</div>
+                            <div class="history-route">
+                                <i class="fas fa-location-dot"></i>
+                                <div>
+                                    <span class="from">Casa - Shopping</span>
+                                    <span class="price">R$ 18,00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ SERVICOS ============ -->
+            <section id="servicos" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('home')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Produtos e Servicos</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content">
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <div class="service-icon gas"><i class="fas fa-droplet"></i></div>
+                            <h4>Gas de Cozinha</h4>
+                            <span>A partir de R$ 100</span>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon water"><i class="fas fa-bottle-water"></i></div>
+                            <h4>Agua Mineral</h4>
+                            <span>A partir de R$ 8</span>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon food"><i class="fas fa-utensils"></i></div>
+                            <h4>Comida</h4>
+                            <span>Diversos</span>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon pharmacy"><i class="fas fa-pills"></i></div>
+                            <h4>Farmacia</h4>
+                            <span>Entrega rapida</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ PARCEIROS ============ -->
+            <section id="parceiros" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('home')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Parceiros</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content">
+                    <div class="partners-grid">
+                        <div class="partner-card">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=120&fit=crop"
+                                alt="Partner">
+                            <div class="partner-info">
+                                <h4>Santa Felicidade</h4>
+                                <span><i class="fas fa-utensils"></i> Bar e Gourmet</span>
+                                <span class="discount">10% OFF</span>
+                            </div>
+                        </div>
+                        <div class="partner-card">
+                            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=120&fit=crop"
+                                alt="Partner">
+                            <div class="partner-info">
+                                <h4>Drogaria 23</h4>
+                                <span><i class="fas fa-pills"></i> Farmacia</span>
+                                <span class="discount">5% OFF</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ CONFIGURACOES ============ -->
+            <section id="configuracoes" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('perfil')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Configuracoes</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content">
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <span>Notificacoes</span>
+                            <div class="toggle active"></div>
+                        </div>
+                        <div class="setting-item">
+                            <span>Modo escuro</span>
+                            <div class="toggle"></div>
+                        </div>
+                        <div class="setting-item">
+                            <span>Som</span>
+                            <div class="toggle active"></div>
+                        </div>
+                        <div class="setting-item">
+                            <span>Compartilhar localizacao</span>
+                            <div class="toggle active"></div>
+                        </div>
+                    </div>
+                    <h3 class="section-title">Sobre</h3>
+                    <div class="about-info">
+                        <p>Versao 2.0.0</p>
+                        <p>2026 Bora Passageiro</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ INDICAR ============ -->
+            <section id="indicar" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('perfil')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Indique e Ganhe</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content center">
+                    <div class="referral-card">
+                        <i class="fas fa-gift"></i>
+                        <h3>Ganhe R$ 5,00</h3>
+                        <p>Por cada amigo que completar uma viagem</p>
+                        <div class="referral-code">
+                            <span class="code">MATEUS2026</span>
+                            <button class="copy-btn"><i class="fas fa-copy"></i></button>
+                        </div>
+                    </div>
+                    <button class="btn-primary">
+                        <i class="fas fa-share"></i> Compartilhar Codigo
+                    </button>
+                </div>
+            </section>
+
+            <!-- ============ ITENS PERDIDOS ============ -->
+            <section id="itens-perdidos" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('perfil')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Itens Perdidos</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content center">
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h3>Nenhum item perdido</h3>
+                        <p>Se voce perdeu algo durante uma viagem, entre em contato com nosso suporte.</p>
+                        <button class="btn-outline">Falar com Suporte</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ ALERTAS ============ -->
+            <section id="alertas" class="screen">
+                <header class="screen-header">
+                    <button class="back-btn" onclick="showScreen('home')">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Notificacoes</h2>
+                    <div></div>
+                </header>
+                <div class="screen-content">
+                    <div class="notification-list">
+                        <div class="notification-item unread">
+                            <div class="notif-icon"><i class="fas fa-percent"></i></div>
+                            <div class="notif-content">
+                                <h4>Promocao do dia!</h4>
+                                <p>20% de desconto em corridas ate as 18h</p>
+                                <span class="notif-time">Ha 1 hora</span>
+                            </div>
+                        </div>
+                        <div class="notification-item unread">
+                            <div class="notif-icon"><i class="fas fa-star"></i></div>
+                            <div class="notif-content">
+                                <h4>Avalie sua viagem</h4>
+                                <p>Como foi sua experiencia?</p>
+                                <span class="notif-time">Ha 2 horas</span>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div class="notif-icon"><i class="fas fa-check"></i></div>
+                            <div class="notif-content">
+                                <h4>Viagem concluida</h4>
+                                <p>Sua viagem para o Terminal foi concluida</p>
+                                <span class="notif-time">Ontem</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
